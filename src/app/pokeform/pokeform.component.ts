@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 import { AlertComponent } from '../shared/alert/alert.component';
 
@@ -20,15 +20,22 @@ export class PokeformComponent implements OnInit {
 
   initForm() {
     this.pokeForm = this.formBuilder.group({
-      'number' : ['', Validators.required]
+      'number' : ['', [Validators.required, this.validateNumber]]
     });
   }
 
+  validateNumber(control: AbstractControl) {
+    if (control.value < 1 || control.value > 150) {
+      return {ogPokemon: 'Pick number between 1 and 150'};
+    } else {
+      return null;
+    }
+  }
+
   getPokeInfo() {
-    console.log('get pokemon number', this.pokeForm.get('number').value);
     if (this.pokeForm.invalid) {
       this.alert.newAlert('error', 'invalid form');
-      return console.log('form is invalid.');
+      return;
     }
 
   }

@@ -6,7 +6,7 @@
     <form novalidate [formGroup]="pokeForm" (ngSubmit)="getPokeInfo()">
       <div class="form-group">
         <label for="pokeNumber">Pokemon Number</label>
-        <input formControlName="number" type="text" class="form-control" id="pokeNumber" placeholder="1 - 150">
+        <input formControlName="number" type="number" class="form-control" id="pokeNumber" placeholder="1 - 150">
       </div>
 
       <button type="submit" class="btn btn-default">Go!</button>
@@ -16,5 +16,6 @@
   <div class="col-sm-4">
     <pre>{{pokeForm.value | json}}</pre>
     <pre>valid =? {{pokeForm.valid | json}}</pre>
+    <pre>number errors = {{pokeForm.get('number').errors | json}}</pre>
   </div>  
 </div>
