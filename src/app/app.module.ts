@@ -4,11 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { PokeformComponent } from './pokeform/pokeform.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PokeformComponent
+    PokeformComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

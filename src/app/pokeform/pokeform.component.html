@@ -1,5 +1,8 @@
 <div class="row">
+
   <div class="col-sm-4">
+    <app-alert></app-alert>
+
     <form novalidate [formGroup]="pokeForm" (ngSubmit)="getPokeInfo()">
       <div class="form-group">
         <label for="pokeNumber">Pokemon Number</label>
@@ -13,5 +16,5 @@
   <div class="col-sm-4">
     <pre>{{pokeForm.value | json}}</pre>
     <pre>valid =? {{pokeForm.valid | json}}</pre>
-  </div>
+  </div>  
 </div>
