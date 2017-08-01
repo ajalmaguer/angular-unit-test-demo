@@ -1,12 +1,22 @@
+import { Component } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+
+@Component({
+  template: '',
+  selector: 'app-pokeform'
+})
+class PokeFormStubComponent {
+
+}
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        PokeFormStubComponent
       ],
     }).compileComponents();
   }));
