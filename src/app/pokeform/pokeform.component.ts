@@ -58,5 +58,4 @@ export class PokeformComponent implements OnInit {
 			}
 		);
 	}
-
 }
