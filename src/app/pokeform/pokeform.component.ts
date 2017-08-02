@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
+import { PokeService } from '../poke-service/poke.service';
+
 import { AlertComponent } from '../shared/alert/alert.component';
 
 @Component({
@@ -11,8 +13,12 @@ import { AlertComponent } from '../shared/alert/alert.component';
 export class PokeformComponent implements OnInit {
 	pokeForm: FormGroup;
 	@ViewChild(AlertComponent) alert: AlertComponent;
+	pokemon = null;
 
-	constructor(private formBuilder: FormBuilder) { }
+	constructor(
+		private formBuilder: FormBuilder,
+		private pokeService: PokeService,
+	) { }
 
 	ngOnInit() {
 		this.initForm();
@@ -36,8 +42,21 @@ export class PokeformComponent implements OnInit {
 		if (this.pokeForm.invalid) {
 			this.alert.newAlert('error', 'invalid form');
 			return;
+		} else {
+			this.alert.newAlert('', 'Fetching Pokemon...');
+			this.pokemon = null;
 		}
 
+		const id = this.pokeForm.get('number').value;
+
+		this.pokeService.getPokemon(id).subscribe(
+			res => {
+				this.pokemon = res;
+				this.alert.hideAlert();
+			}, err => {
+				this.alert.newAlert('Error', 'Can\'t fetch pokemon at this time' );
+			}
+		);
 	}
 
 }
