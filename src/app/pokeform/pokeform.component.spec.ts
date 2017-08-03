@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, AbstractControl } from '@angular/forms';
 
 // services
@@ -91,6 +92,22 @@ describe('PokeformComponent', () => {
 		expect(component.alert.newAlert).toHaveBeenCalledWith('', 'Fetching Pokemon...');
 		expect(component.alert.hideAlert).toHaveBeenCalled();
 		expect(component.pokemon).toEqual(testPokemon);
+	});
+
+	it('should display pokemon on page', () => {
+		let pokemonElement = fixture.debugElement.query(By.css('.pokemon'));
+
+		expect(pokemonElement).toBeFalsy();
+
+		component.pokemon = {name: 'test', sprite: 'test.png'};
+		fixture.detectChanges();
+
+		pokemonElement = fixture.debugElement.query(By.css('.pokemon'));
+		const pokeImage = fixture.debugElement.query(By.css('.pokemon img'));
+		
+		expect(pokemonElement).toBeTruthy();
+		expect(pokemonElement.nativeElement.textContent).toContain('test');
+		expect(pokeImage.nativeElement.src).toContain('test.png');
 	});
 });
 
