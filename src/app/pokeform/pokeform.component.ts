@@ -26,7 +26,7 @@ export class PokeformComponent implements OnInit {
 
 	initForm() {
 		this.pokeForm = this.formBuilder.group({
-			'number' : ['', [Validators.required, this.validateNumber]]
+			'number' : ['', [ Validators.required, this.validateNumber ]]
 		});
 	}
 
