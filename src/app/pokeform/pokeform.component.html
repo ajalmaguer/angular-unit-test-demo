@@ -3,10 +3,21 @@
 	<div class="col-sm-6">
 
 		<form novalidate [formGroup]="pokeForm" (ngSubmit)="getPokeInfo()">
-			<div class="form-group">
+			<div class="form-group" [ngClass]="{'has-error': pokeForm.get('number').invalid &&  pokeForm.touched}">
 				<label for="pokeNumber">Enter a pokemon #</label><br>
 				<input formControlName="number" type="number" class="form-control" id="pokeNumber" placeholder="1 - 150">
 			</div>
+			<div *ngIf="pokeForm.touched" class="text-danger">
+				<span *ngIf="pokeForm.get('number').hasError('required')">
+					Required.
+				</span>
+				
+				<span *ngIf="pokeForm.get('number').hasError('ogPokemon')">
+					Enter a pokemon number between 1 and 150
+				</span>
+			</div>
+			
+			<br>
 
 			<button type="submit" class="btn btn-default">I choose you!</button>
 		</form>
